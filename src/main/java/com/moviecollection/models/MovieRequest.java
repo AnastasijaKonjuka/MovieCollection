@@ -1,6 +1,5 @@
 package com.moviecollection.models;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,12 +10,10 @@ import lombok.NoArgsConstructor;
 import java.net.URL;
 
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 @Data
-public class Movie {
-
+public class MovieRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -30,6 +27,7 @@ public class Movie {
     private String posterUrl;
     private Double rating;
     private String actors;
+
 
 
 }

@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sign In</title>
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/register.css" rel="stylesheet">
 </head>
 <body>
+<header th:replace="~{fragments/header :: not-logged-in-header}"></header>
+<main class="margin-top">
+    <h3 class="margin-top">Sign in</h3>
+    <form method="post" action="/login">
 
+
+        <div>
+            <label>Enter your user username</label>
+            <input name="username" minlenght="3" type="text" required>
+        </div>
+        <div>
+            <label>Enter your password</label>
+            <input name="password" minlenght="4" type="password" required>
+        </div>
+
+        <div>
+            <button class="button green-theme" type="submit">Login</button>
+            <button class="button red-theme" type="reset">Clear form</button>
+        </div>
+    </form>
+    <section th:if="${status != null}">
+        <div th:if="${status == 'REGISTER_SUCCESS'}">
+            <span class="green-theme"> Account created successfully, please login to continue! </span>
+        </div>
+        <div th:if="${status == 'LOGIN_FAILED'}">
+            <span class="red-theme" th:text="${message}"> </span>
+        </div>
+    </section>
+
+</main>
 </body>
 </html>
+
+
