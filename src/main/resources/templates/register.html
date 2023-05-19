@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
 </head>
 <body>
-
+    <main class="margin-top">
+        <h3 class="margin-top">Register</h3>
+        <form method="post" action="/register">
+            <div>
+                <label>Enter your name</label>
+                <input name="name" type="text" required>
+            </div>
+            <div>
+                <label>Enter your email</label>
+                <input name="email" type="email" required>
+            </div>
+            <div>
+                <label>Enter your password</label>
+                <input name="password" type="password" required>
+            </div>
+            <div>
+                <label>Enter your Date of Birth</label>
+                <input name="dateOfBirth" type="date" required>
+            </div>
+            <div>
+                <button class="button green-theme" type="submit">Register</button>
+                <button class="button red-theme" type="reset">Clear form</button>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

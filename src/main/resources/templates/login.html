@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-
+<main class="margin-top">
+    <h3 class="margin-top">Login</h3>
+    <form method="post" action="/login">
+        <div>
+            <label>Enter your email</label>
+            <input name="email" type="email" required>
+        </div>
+        <div>
+            <label>Enter your password</label>
+            <input name="password" type="password" required>
+        </div>
+        <div>
+            <button class="button green-theme" type="submit">Login</button>
+            <button class="button red-theme" type="reset">Clear form</button>
+        </div>
+    </form>
+    <section th:if="${status != null}">
+        <div th:if="${status == 'REGISTER_SUCCESS'}">
+            <span class="green-theme">Account created successfully, Please login to continue</span>
+        </div>
+        <div th:if="${status == 'LOGIN_FAILED'}">
+            <span class="red-theme" th:text="${message}"></span>
+        </div>
+    </section>
+</main>
 </body>
 </html>
