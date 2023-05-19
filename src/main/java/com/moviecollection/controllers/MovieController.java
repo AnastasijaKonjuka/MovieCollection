@@ -1,10 +1,9 @@
 package com.moviecollection.controllers;
 
-import com.moviecollection.models.Admin;
+
 import com.moviecollection.models.Movie;
 import com.moviecollection.models.MovieRequest;
 import com.moviecollection.repositories.MovieRepository;
-import com.moviecollection.services.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,28 +15,15 @@ import java.util.ArrayList;
 
 
 @Controller
-public class AdminController {
+public class MovieController {
 
-    private AdminService adminService;
     private MovieRepository movieRepository;
     private MovieRequest movieRequest;
 
-    AdminController(MovieRepository movieRepository) {
+    MovieController(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
-
-    @GetMapping("/login")
-    public String handleAdminRegistration(Admin admin) {
-        try {
-            this.adminService.verifyAdmin(admin.getPassword());
-            return "redirect:login?status=REGISTER_SUCCESS";
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return "redirect:register?status=REGISTER_FAILED&message=" + exception.getMessage();
-        }
-
-    }
 
     @GetMapping("/add-movie")
     public String displayMoviePage() {
