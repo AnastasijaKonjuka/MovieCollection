@@ -24,4 +24,9 @@ public class UserService {
         if(user == null) throw new Exception("Email or password is not correct!");
         return user;
     }
+
+    public boolean verifyAdmin(Integer id) {
+        if (userRepository.findUserById(id).getRole().equals("admin")) return true;
+        return false;
+    }
 }

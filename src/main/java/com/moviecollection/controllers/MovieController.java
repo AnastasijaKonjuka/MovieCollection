@@ -1,34 +1,40 @@
 package com.moviecollection.controllers;
 
 import com.moviecollection.models.Movie;
-import com.moviecollection.models.MovieRequest;
 import com.moviecollection.services.MovieService;
+import com.moviecollection.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 class MovieController {
 
-    private MovieService movieService;
+    private final UserService userService;
+    private final MovieService movieService;
+
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(UserService userService, MovieService movieService) {
+        this.userService = userService;
         this.movieService = movieService;
     }
 
     @GetMapping("/add-movie")
-    public String showAddMoviePage() {
-        return "add-movie";
+    public String showAddMoviePage(@CookieValue(value="loggedInUserId", defaultValue = "") String userId) {
+        try {
+            if (userId.isEmpty() || !userService.verifyAdmin(Integer.valueOf(userId))) throw new RuntimeException("Admin session expired. Please login to try again");
+            return "add-movie";
+        } catch (Exception exception) {
+            return "redirect:login?status=ADMIN_ERROR&message=" + exception.getMessage();
+        }
     }
 
     @PostMapping("/add-movie")
-    public String addMovie(Movie movie) throws Exception {
+    public String addMovie(@CookieValue(value="loggedInUserId", defaultValue = "") String userId, Movie movie) throws Exception {
         try {
+            if (userId.isEmpty() || !userService.verifyAdmin(Integer.valueOf(userId))) throw new RuntimeException("Admin session expired. Please login to try again");
             this.movieService.createMovie(movie);
             return "redirect:add-movie?status=ADDED_SUCCESS";
         } catch (Exception exception) {
@@ -56,52 +62,4 @@ class MovieController {
 
     }
 }
-
-
-//    @PostMapping("/add-movie") //create new movie
-//    public String addMovie(MovieRequest movieRequest) throws Exception {
-//        this.movieService.createMovie(new Movie(
-//                null,
-//                movieRequest.getTitle(),
-//                movieRequest.getYear(),
-//                movieRequest.getGenre(),
-//                null,
-//                movieRequest.getRuntime(),
-//                movieRequest.getTrailerUrl(),
-//                movieRequest.getPosterUrl(),
-//                null,
-//                movieRequest.getActors()
-//        ));
-//        return "redirect:/?message=MOVIE_CREATED";
-//    }
-//    @GetMapping("/") //redirect to be able to see all movies
-//    public String displayAllMovies(@RequestParam(required = false) String message, Model model){
-//        ArrayList<Movie> movie = movieRepository.allMovie();
-//        model.addAttribute("movie", movie);
-//        model.addAttribute("message", message);
-//        return "all-movie";
-//    }
-//
-//    @GetMapping("/update-movie/{movieId}")
-//    public String update(@PathVariable  MovieRequest movieRequest, @PathVariable String movieId) {
-//        Movie movie = new Movie(
-//                        null,
-//                        movieRequest.getTitle(),
-//                        movieRequest.getYear(),
-//                        movieRequest.getGenre(),
-//                        null,
-//                        movieRequest.getRuntime(),
-//                        movieRequest.getTrailerUrl(),
-//                        movieRequest.getPosterUrl(),
-//                        null,
-//                        movieRequest.getActors());
-//
-//        this.movieRepository.update(movie);
-//        return "update-movie";
-//    }
-//
-
-
-
-
 
