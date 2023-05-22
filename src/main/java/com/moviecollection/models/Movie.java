@@ -25,7 +25,7 @@ public class Movie {
     private Integer runtime;
     private String trailerUrl;
     private String posterUrl;
-    private Double rating;
+    private Double rating = null;
     private String actors;
 
     /*

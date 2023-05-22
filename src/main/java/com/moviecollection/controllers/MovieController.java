@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 @Controller
 class MovieController {
 
-
-    private MovieController movieRepository;
-    private MovieRequest movieRequest;
     private MovieService movieService;
 
     @Autowired
@@ -24,17 +21,15 @@ class MovieController {
         this.movieService = movieService;
     }
 
-
-    @GetMapping("/register")
-    public String displayMoviePage() {
-        return "/register";
+    @GetMapping("/add-movie")
+    public String showAddMoviePage() {
+        return "add-movie";
     }
-
 
     @PostMapping("/add-movie")
     public String addMovie(Movie movie) throws Exception {
         try {
-            this.movieService.createMovie(new Movie());
+            this.movieService.createMovie(movie);
             return "redirect:add-movie?status=ADDED_SUCCESS";
         } catch (Exception exception) {
             exception.printStackTrace();

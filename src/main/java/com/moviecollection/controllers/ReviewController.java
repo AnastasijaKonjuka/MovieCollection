@@ -17,12 +17,12 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/review")
+    @GetMapping("/add-review")
     public String showCreatedReview(){
-        return "review";
+        return "add-review";
     }
 
-    @PostMapping("/review")
+    @PostMapping("/add-review")
     public String handleReviewCreation(Review review){
         try {
             this.reviewService.createReview(review);

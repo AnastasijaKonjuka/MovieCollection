@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+</head>
+<body>
+<main class="margin-top">
+  <h3 class="margin-top">Add Movie</h3>
+  <form method="post" action="/add-movie">
+    <div>
+      <label>Title</label>
+      <input name="title" type="text" required>
+    </div>
+    <div>
+      <label>Year</label>
+      <input name="year" type="number" required>
+    </div>
+    <div>
+      <label>Genre</label>
+      <input name="genre" type="text" required>
+    </div>
+    <div>
+      <label>Description</label>
+      <input name="description" type="text" required>
+    </div>
+    <div>
+      <label>Runtime</label>
+      <input name="runtime" type="number" required>
+    </div>
+    <div>
+      <label>Trailer URL</label>
+      <input name="trailerUrl" type="url" required>
+    </div>
+    <div>
+      <label>Poster URL</label>
+      <input name="posterUrl" type="url" required>
+    </div>
+    <div>
+      <label>Actors</label>
+      <input name="actors" type="text" required>
+    </div>
+    <div>
+      <button class="button green-theme" type="submit">Save</button>
+      <button class="button red-theme" type="reset">Clear form</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>
