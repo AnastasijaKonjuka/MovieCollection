@@ -4,15 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Admin {
-
-    private String password = "admin";
-    private String createdAt;
-    private String updatedAt;
-
-
+public class LoginRequest {
+    String email;
+    String password;
 }
-
