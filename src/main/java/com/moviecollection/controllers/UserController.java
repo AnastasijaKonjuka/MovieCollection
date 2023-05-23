@@ -3,6 +3,8 @@ package com.moviecollection.controllers;
 import com.moviecollection.models.LoginRequest;
 import com.moviecollection.models.User;
 import com.moviecollection.services.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,10 +50,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String handleLogin(LoginRequest loginRequest) {
+    public String handleLogin(LoginRequest loginRequest, HttpServletResponse response) {
         try {
             User loggedInUser = this.userService.verifyUser(loginRequest.getEmail(), loginRequest.getPassword());
-            // save user id to cookie/session
+            if (loggedInUser == null) throw new RuntimeException("User not found");
+
+            Cookie cookie = new Cookie("loggedInUserId", loggedInUser.getId().toString());
+            cookie.setMaxAge(60*60*3); //time in seconds how long cookie will be saved in users browser
+            response.addCookie(cookie);
+
+            if (loggedInUser.getRole().equals("admin")) return "redirect:/add-movie";
             return "redirect:/";
         } catch (Exception exception) {
             return "redirect:login?status=LOGIN_FAILED&message=" + exception.getMessage();
