@@ -4,10 +4,14 @@
   <link href="../static/css/main.css" rel="stylesheet">
   <meta charset="UTF-8">
   <title>Add Movie</title>
+  <nav class="movie-nav">
+    <a class="nav-link" href="/add-movie">Add Movie</a>
+    <a class="nav-link" href="/movie-list">Movie List</a>
+    <a class="nav-link" href="/logout">Logout</a>
+  </nav>
 
 </head>
 <body>
-<header th:replace="~{fragments/header :: not-logged-in-header}"></header>
 <main class="margin-top">
   <h3 class="margin-top">Add Movie</h3>
   <form method="post" action="/add-movie">

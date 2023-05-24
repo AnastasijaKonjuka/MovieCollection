@@ -24,6 +24,8 @@ public class MovieService {
     }
 
     public void updateMovie(Integer movieId) {
+        Movie movieToUpdate = movieRepository.findMovieById(movieId);
+        this.movieRepository.save(movieToUpdate);
     }
 
 }

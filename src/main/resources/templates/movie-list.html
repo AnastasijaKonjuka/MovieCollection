@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <head>
+    <meta charset="UTF-8">
+    <title>Movie List</title>
+</head>
+<nav class="movie-nav">
+    <a class="nav-link" href="/add-movie">Add Movie</a>
+    <a class="nav-link" href="/movie-list">Movie List</a>
+    <a class="nav-link" href="/logout">Logout</a>
+</nav>
+</header>
+<body>
+    <main class="container">
+        <h3>Movie List</h3>
+        <div class="container" th:if="${message != null}">
+            <div class="bg-success text-white p-3" th:switch="${message}">
+                <span th:case="'MOVIE_UPDATED'">Movie updated successfully!</span>
+                <span th:case="'MOVIE_DELETED'">Item deleted successfully!</span>
+                <span th:case="'MOVIE_CREATED'">Item created successfully!</span>
+            </div>
+        </div>
+        <section class="container">
+            <div th:if="${movieList.isEmpty()}">
+                No movies to display
+            </div>
+            <ul th:if="${!movieList.isEmpty()}">
+                <li th:each="movie: ${movieList}">
+                    <span th:text="${movie.getId()}"></span>
+                    <span th:text="${movie.getTitle()}"></span>
+                    <a class="btn btn-secondary" th:href="${'/update-movie/' + movie.getId()}">Update</a>
+                    <a class="btn btn-danger" th:href="${'/delete-movie/' + movie.getId()}">Delete</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
