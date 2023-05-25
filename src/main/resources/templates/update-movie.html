@@ -1,0 +1,55 @@
+<!DOC TYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Movie</title>
+  <nav class="movie-nav">
+    <a class="nav-link" href="/add-movie">Add Movie</a>
+    <a class="nav-link" href="/movie-list">Movie List</a>
+    <a class="nav-link" href="/logout">Logout</a>
+  </nav>
+</head>
+<body>
+<main class="margin-top">
+  <h3 class="margin-top">Update Movie</h3>
+  <form th:action="${'/update-movie/' + movie.getId()}" method="post" class="container">
+    <div class="form-group">
+      <label>Title</label>
+      <input th:value="${movie.getTitle()}" class="form-control" name="title" type="text" required>
+    </div>
+    <div class="form-group">
+      <label>Year</label>
+      <input th:value="${movie.getYear()}" class="form-control" name="year" type="number" required>
+    </div>
+    <div class="form-group">
+      <label>Genre</label>
+      <input th:value="${movie.getGenre()}" class="form-control" name="genre" type="text" required>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input th:value="${movie.getDescription()}" class="form-control" name="description" type="text" required>
+    </div>
+    <div class="form-group">
+      <label>Runtime</label>
+      <input th:value="${movie.getRuntime()}" class="form-control" name="runtime" type="number" required>
+    </div>
+    <div class="form-group">
+      <label>Trailer URL</label>
+      <input th:value="${movie.getTrailerUrl()}" class="form-control" name="trailerUrl" type="url" required>
+    </div>
+    <div class="form-group">
+      <label>Poster URL</label>
+      <input th:value="${movie.getPosterUrl()}" class="form-control" name="posterUrl" type="url" required>
+    </div>
+    <div class="form-group">
+      <label>Actors</label>
+      <input th:value="${movie.getActors()}" class="form-control" name="actors" type="text" required>
+    </div>
+    <div>
+      <button class="button green-theme" type="submit">Save</button>
+      <button class="button red-theme" type="reset">Clear form</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>
