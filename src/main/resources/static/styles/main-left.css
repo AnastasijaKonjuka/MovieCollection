@@ -16,8 +16,8 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: left;
+    text-align: left;
 }
 .long-input {
     width: 400px;
@@ -27,13 +27,21 @@ body {
     background-color: darkred;
     color: white;
 }
+
+.red-button:hover {
+    background-color: darkmagenta;
+}
 .text-light {
     color: black !important;
 }
+
 .pt-25 {
     padding-top: 25%;
 }
 
 .text-lg {
     font-size: 5em;
+}
+.form-group {
+    margin-bottom: 20px;
 }

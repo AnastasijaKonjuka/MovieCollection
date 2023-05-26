@@ -19,3 +19,40 @@ body {
 .text-shadow {
     text-shadow: .1em .1em .15em #000;
 }
+.card {
+    position: fixed;
+    bottom: -630px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 0.3s;
+}
+.custom-card {
+    background-image: url("/images/film.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.custom-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.custom-card-body {
+    padding: 50px;
+}
+.card:hover {
+    bottom: 0;
+}
+
+.main-body {
+    margin-bottom: 500px;
+}
+
+.movie-image {
+    width: 100px;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+
