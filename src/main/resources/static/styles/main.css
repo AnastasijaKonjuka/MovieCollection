@@ -1,21 +1,32 @@
 body, html {
     height: 100%;
 }
-
 body {
-    background: url('/images/background-main.jpg') center center no-repeat;
+    color: black;
+    background-image: url('/images/background-main.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'Lato', Arial, Helvetica, sans-serif;
 }
 
+.container-narrow {
+    background: url('/images/texture.jpg') repeat 0 0;
+    opacity: 0.6;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Add this line to center horizontally */
+    text-align: center;
+}
+
+.text-light {
+    color: black !important;
+}
 .pt-25 {
     padding-top: 25%;
 }
 
 .text-lg {
     font-size: 5em;
-}
-
-.text-shadow {
-    text-shadow: .1em .1em .15em #000;
 }

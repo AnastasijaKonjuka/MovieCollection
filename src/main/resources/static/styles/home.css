@@ -1,0 +1,21 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    background: url('/images/background-main.jpg') center center no-repeat;
+    background-size: cover;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
+.pt-25 {
+    padding-top: 25%;
+}
+
+.text-lg {
+    font-size: 5em;
+}
+
+.text-shadow {
+    text-shadow: .1em .1em .15em #000;
+}

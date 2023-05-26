@@ -5,6 +5,7 @@ import com.moviecollection.models.User;
 import com.moviecollection.services.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
+   /* @PostMapping("/login")
     public String handleLogin(LoginRequest loginRequest, HttpServletResponse response) {
         try {
             User loggedInUser = this.userService.verifyUser(loginRequest.getEmail(), loginRequest.getPassword());
@@ -59,6 +60,21 @@ public class UserController {
             Cookie cookie = new Cookie("loggedInUserId", loggedInUser.getId().toString());
             cookie.setMaxAge(60*60*3); //time in seconds how long cookie will be saved in users browser
             response.addCookie(cookie);
+
+            if (loggedInUser.getRole().equals("admin")) return "redirect:/movie-list";
+            return "redirect:/";
+        } catch (Exception exception) {
+            return "redirect:login?status=LOGIN_FAILED&message=" + exception.getMessage();
+        }
+    }*/
+
+    @PostMapping("/login")
+    public String handleLogin(LoginRequest loginRequest, HttpSession session) {
+        try {
+            User loggedInUser = this.userService.verifyUser(loginRequest.getEmail(), loginRequest.getPassword());
+            if (loggedInUser == null) throw new RuntimeException("User not found");
+
+            session.setAttribute("loggedIn", true);
 
             if (loggedInUser.getRole().equals("admin")) return "redirect:/movie-list";
             return "redirect:/";
@@ -77,5 +93,14 @@ public class UserController {
         } catch (Exception exception) {
             return "redirect:login?status=LOGOUT_FAILED&message=" + exception.getMessage();
         }
+    }
+
+    @GetMapping("/contact")
+    public String showContactPage() {
+        return "contact";
+    }
+    @GetMapping("/about")
+    public String showAboutPage() {
+        return "about";
     }
 }
