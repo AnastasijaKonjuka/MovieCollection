@@ -51,18 +51,30 @@ public class UserController {
         return "login";
     }
 
+   /* @PostMapping("/login")
+    public String handleLogin(LoginRequest loginRequest, HttpServletResponse response) {
+        try {
+            User loggedInUser = this.userService.verifyUser(loginRequest.getEmail(), loginRequest.getPassword());
+            if (loggedInUser == null) throw new RuntimeException("User not found");
 
-   @PostMapping("/login")
-    public String handleLogin(LoginRequest loginRequest, HttpServletResponse response, HttpSession session) {
+            Cookie cookie = new Cookie("loggedInUserId", loggedInUser.getId().toString());
+            cookie.setMaxAge(60*60*3); //time in seconds how long cookie will be saved in users browser
+            response.addCookie(cookie);
+
+            if (loggedInUser.getRole().equals("admin")) return "redirect:/movie-list";
+            return "redirect:/";
+        } catch (Exception exception) {
+            return "redirect:login?status=LOGIN_FAILED&message=" + exception.getMessage();
+        }
+    }*/
+
+    @PostMapping("/login")
+    public String handleLogin(LoginRequest loginRequest, HttpSession session) {
         try {
             User loggedInUser = this.userService.verifyUser(loginRequest.getEmail(), loginRequest.getPassword());
             if (loggedInUser == null) throw new RuntimeException("User not found");
 
             session.setAttribute("loggedIn", true);
-
-            Cookie cookie = new Cookie("loggedInUserId", loggedInUser.getId().toString());
-            cookie.setMaxAge(60*60*3);
-            response.addCookie(cookie);
 
             if (loggedInUser.getRole().equals("admin")) return "redirect:/movie-list";
             return "redirect:/";
@@ -71,16 +83,12 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/logout")
-    public String logout(@CookieValue( value="loggedInUserId", defaultValue = "") String userId, HttpServletResponse response, HttpSession session){
+    public String logout(@CookieValue( value="loggedInUserId", defaultValue = "") String userId, HttpServletResponse response){
         try{
             Cookie cookie = new Cookie("loggedInUserId", userId);
             cookie.setMaxAge(0);
             response.addCookie(cookie);
-
-            session.setAttribute("loggedIn", false);
-
             return "redirect:login?status=LOGOUT_SUCCESS&message=You_logged_out_successfully";
         } catch (Exception exception) {
             return "redirect:login?status=LOGOUT_FAILED&message=" + exception.getMessage();
@@ -95,5 +103,4 @@ public class UserController {
     public String showAboutPage() {
         return "about";
     }
-
 }

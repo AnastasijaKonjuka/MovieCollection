@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <title>Search Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/main-left.css">
+</head>
+
+<body>
+<div class="font-wrapper">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/search">Movie Collection</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item" th:if="${session.loggedIn}">
+                        <a href="/logout" class="nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/login" class="nav-link">Login <i class="fa fa-user" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/register" class="nav-link">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-body">
+        <div class="row justify-content-center">
+            <div class="col-12-lg text-center pt-25 w-100 text-light">
+                <h1 class="font-weight-bold text-lg text-shadow">Search Results</h1>
+                <hr class="bg-light w-50">
+            </div>
+        </div>
+    </div>
+
+    <div class="container search-results">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h3>Search Results for: <span th:text="${movieList[0].title}"></span></h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="movie : ${movieList}">
+                                <div class="media">
+                                    <img src="/images/..." class="mr-3 movie-image" alt="Movie Image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">
+                                            <a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
+                                        </h5>
+                                        <p th:text="${movie.description}"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
