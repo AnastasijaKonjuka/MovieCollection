@@ -69,12 +69,11 @@
                         <ul class="list-group">
                             <li class="list-group-item" th:each="movie : ${movieList}">
                                 <div class="media">
-                                    <img src="/images/..." class="mr-3 movie-image" alt="Movie Image">
+                                    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">
-                                            <a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
+                                            <a th:text="${movie.getTitle()}"></a>
                                         </h5>
-                                        <p th:text="${movie.description}"></p>
                                     </div>
                                 </div>
                             </li>
