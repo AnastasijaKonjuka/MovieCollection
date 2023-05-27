@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search</title>
 </head>
 <body>
-
+<header>Search</header>
+<main class="margin-top">
+    <h3 class="margin-top">Search Movie</h3>
+    <form method="post" action="/search-results">
+        <div>
+            <label>Movie Title</label>
+            <input name="title" type="text" required>
+        </div>
+        <div>
+            <label>Genre</label>
+            <input name="genre" type="text">
+        </div>
+        <div>
+            <label>Actors</label>
+            <input name="actors" type="text">
+        </div>
+        <div>
+            <button class="button green-theme" type="submit">Search</button>
+        </div>
+    </form>
+</main>
 </body>
 </html>

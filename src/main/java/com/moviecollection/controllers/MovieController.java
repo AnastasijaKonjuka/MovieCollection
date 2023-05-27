@@ -2,6 +2,7 @@ package com.moviecollection.controllers;
 
 import com.moviecollection.models.Movie;
 import com.moviecollection.models.MovieRequest;
+import com.moviecollection.models.SearchRequest;
 import com.moviecollection.repositories.MovieRepository;
 import com.moviecollection.services.MovieService;
 import com.moviecollection.services.UserService;
@@ -111,6 +112,18 @@ class MovieController {
         exception.printStackTrace();
         return "redirect:/movie-list?status=FAILED_TO_DELETE&message=" + exception.getMessage();
     }
+    }
+
+    @GetMapping("/search")
+    public String showSearchPage() {
+        return "search";
+    }
+
+    @GetMapping("/search-results")
+    public String showSearchResults(SearchRequest searchRequest, Model model) {
+        String title = searchRequest.getTitle();
+        model.addAttribute("movieList", this.movieRepository.findAllByTitleLike(title));
+        return "search-results";
     }
 }
 
