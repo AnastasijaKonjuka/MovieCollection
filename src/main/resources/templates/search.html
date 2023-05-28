@@ -8,10 +8,10 @@
 <header>Search</header>
 <main class="margin-top">
     <h3 class="margin-top">Search Movie</h3>
-    <form method="post" action="/search-results">
+    <form method="post" action="/search">
         <div>
             <label>Movie Title</label>
-            <input name="title" type="text" required>
+            <input name="title" type="text">
         </div>
         <div>
             <label>Genre</label>
@@ -20,6 +20,10 @@
         <div>
             <label>Actors</label>
             <input name="actors" type="text">
+        </div>
+        <div>
+            <label>Rating from</label>
+            <input name="rating" type="number">
         </div>
         <div>
             <button class="button green-theme" type="submit">Search</button>

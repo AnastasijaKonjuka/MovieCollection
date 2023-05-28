@@ -62,7 +62,8 @@
     <div class="container search-results">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h3>Search Results for: <span th:text="${movieList[0].title}"></span></h3>
+                <h3>Search Results</h3>
+                    <!--for: <span th:text="${movieList[0].title}"></span></h3>-->
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
@@ -72,7 +73,9 @@
                                     <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">
-                                            <a th:text="${movie.getTitle()}"></a>
+                                            <a th:text="${movie.getTitle()}"
+                                               class="new-line btn"
+                                               th:href="'/search/'+${movie.getId()}"></a>
                                         </h5>
                                     </div>
                                 </div>

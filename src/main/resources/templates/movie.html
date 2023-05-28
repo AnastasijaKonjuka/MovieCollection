@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie</title>
+</head>
+<body>
+<div class="media">
+    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
+    <div class="media-body">
+        <h5 class="mt-0 mb-1">
+            <b th:text="${movie.getTitle()}"></b>
+        </h5>
+        <div th:text="${movie.getDescription()}"></div>
+        <div th:text="'Runtime: ' + ${movie.getRuntime()} + ' min'"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -119,11 +119,77 @@ class MovieController {
         return "search";
     }
 
-    @GetMapping("/search-results")
-    public String showSearchResults(SearchRequest searchRequest, Model model) {
+    @PostMapping("/search")
+    public String handleSearch(SearchRequest searchRequest, Model model) {
         String title = searchRequest.getTitle();
-        model.addAttribute("movieList", this.movieRepository.findAllByTitleLike(title));
+        String genre = searchRequest.getGenre();
+        String actors = searchRequest.getActors();
+        Double rating = searchRequest.getRating();
+
+        if(!title.isEmpty() && genre.isEmpty() && actors.isEmpty() && rating == null) {
+        model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCase(title));}
+
+        if(title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByGenre(genre));}
+
+        if(title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByActorsContainingIgnoreCase(actors));}
+
+        if(title.isEmpty() && genre.isEmpty() && actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByRatingIsNullAndRatingIsGreaterThanEqual(rating));}
+
+        if(!title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndActorsContainingIgnoreCaseAndRatingIsNullAndRatingIsGreaterThanEqual(title, genre, actors, rating));}
+
+        if(!title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenre(title, genre));}
+
+        if(!title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndActorsContainingIgnoreCase(title, actors));}
+
+        if(!title.isEmpty() && genre.isEmpty() && actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndRatingIsNullAndRatingIsGreaterThanEqual(title, rating));}
+
+        if(title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByGenreAndActorsContainingIgnoreCase(genre, actors));}
+
+        if(title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByGenreAndRatingIsNullAndRatingIsGreaterThanEqual(genre, rating));}
+
+        if(title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByActorsAndRatingIsNullAndRatingIsGreaterThanEqual(actors, rating));}
+
+        if(!title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndActorsContainingIgnoreCase(title, genre, actors));}
+
+        if(!title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndRatingIsNullAndRatingIsGreaterThanEqual(title, genre, rating));}
+
+        if(!title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByTitleContainingIgnoreCaseAndActorsContainingIgnoreCaseAndRatingIsNullAndRatingIsGreaterThanEqual(title, actors, rating));}
+
+        if(title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating != null) {
+            model.addAttribute("movieList", this.movieRepository.findAllByGenreAndActorsContainingIgnoreCaseAndRatingIsNullAndRatingIsGreaterThanEqual(genre, actors, rating));}
+
+        if(title.isEmpty() && genre.isEmpty() && actors.isEmpty() && rating == null) {
+            model.addAttribute("movieList", this.movieRepository.findAll());}
+
         return "search-results";
     }
+
+    @GetMapping("/search/{id}")
+    public String showMoviePage(@PathVariable Integer id, Model model) {
+        model.addAttribute("movie", this.movieRepository.findMovieById(id));
+        return "movie";
+    }
+
+
+
+
+
+
+
+
+
 }
 
