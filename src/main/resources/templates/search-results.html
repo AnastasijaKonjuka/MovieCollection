@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Search Results</title>
     <meta charset="utf-8">
@@ -12,7 +11,6 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/main-left.css">
 </head>
-
 <body>
 <div class="font-wrapper">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -49,7 +47,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container main-body">
         <div class="row justify-content-center">
             <div class="col-12-lg text-center pt-25 w-100 text-light">
@@ -58,25 +55,32 @@
             </div>
         </div>
     </div>
-
     <div class="container search-results">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h3>Search Results</h3>
-                    <!--for: <span th:text="${movieList[0].title}"></span></h3>-->
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="list-group">
                             <li class="list-group-item" th:each="movie : ${movieList}">
                                 <div class="media">
-                                    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
+                                    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.posterUrl}" style="width: 200px; height: 300px;">
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">
-                                            <a th:text="${movie.getTitle()}"
+                                            <a th:text="${movie.title}"
                                                class="new-line btn"
-                                               th:href="'/search/'+${movie.getId()}"></a>
+                                               th:href="'/search/'+${movie.id}"></a>
                                         </h5>
+                                        <div>
+                                            <b>Year:</b> <span th:text="${movie.year}"></span>
+                                        </div>
+                                        <div>
+                                            <b>Genre:</b> <span th:text="${movie.genre}"></span>
+                                        </div>
+                                        <div>
+                                            <b>Runtime:</b> <span th:text="${movie.runtime}"></span> min
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -88,5 +92,4 @@
     </div>
 </div>
 </body>
-
 </html>

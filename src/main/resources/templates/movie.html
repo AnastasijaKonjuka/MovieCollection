@@ -6,13 +6,32 @@
 </head>
 <body>
 <div class="media">
-    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
+    <img class="mr-3 movie-image" alt="Movie Poster" th:src="${movie.posterUrl}" style="width: 200px; height: 300px;">
     <div class="media-body">
         <h5 class="mt-0 mb-1">
-            <b th:text="${movie.getTitle()}"></b>
+            <b th:text="${movie.title}"></b>
         </h5>
-        <div th:text="${movie.getDescription()}"></div>
-        <div th:text="'Runtime: ' + ${movie.getRuntime()} + ' min'"></div>
+        <div th:text="${movie.description}"></div>
+        <div th:text="'Runtime: ' + ${movie.runtime} + ' min'"></div>
+        <div>
+            <b>Year:</b> <span th:text="${movie.year}"></span>
+        </div>
+        <div>
+            <b>Genre:</b> <span th:text="${movie.genre}"></span>
+        </div>
+        <div>
+            <b>Trailer:</b>
+            <video width="400" controls>
+                <source th:src="${movie.trailerUrl}" type="video/mp4">
+                Your browser does not support this video.
+            </video>
+        </div>
+        <div>
+            <b>Rating:</b> <span th:text="${movie.rating}"></span>
+        </div>
+        <div>
+            <b>Actors:</b> <span th:text="${movie.actors}"></span>
+        </div>
     </div>
 </div>
 </body>
