@@ -10,7 +10,7 @@ body {
 
 .container-narrow {
     background: url('/images/texture.jpg') repeat 0 0;
-    opacity: 0.6;
+    opacity: 0.9;
     max-width: 1200px;
     margin: 0 auto;
     height: 100vh;

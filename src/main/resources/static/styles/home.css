@@ -28,7 +28,7 @@ body {
 }
 .custom-card {
     background-image: url("/images/film.jpg");
-    opacity: 0.8;
+    opacity: 0.9;
     background-size: cover;
     background-position: center;
 }

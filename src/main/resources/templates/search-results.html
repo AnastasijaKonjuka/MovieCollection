@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Search Results</title>
     <meta charset="utf-8">
@@ -11,8 +10,44 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/main-left.css">
-</head>
+    <style>
+        .movie-card {
+            display: inline-block;
+            width: calc(33.33% - 20px);
+            margin: 80px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: none;
+        }
 
+        .movie-image {
+            width: 200px;
+            height: 300px;
+        }
+
+        .movie-title {
+            color: red;
+            transition: color 0.3s ease-in-out;
+            margin-bottom: 5px;
+        }
+
+        .movie-title:hover {
+            color: darkmagenta;
+        }
+
+        @media (max-width: 768px) {
+            .movie-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .movie-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
 <div class="font-wrapper">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -50,37 +85,30 @@
         </div>
     </nav>
 
-    <div class="container main-body">
-        <div class="row justify-content-center">
-            <div class="col-12-lg text-center pt-25 w-100 text-light">
-                <h1 class="font-weight-bold text-lg text-shadow">Search Results</h1>
-                <hr class="bg-light w-50">
-            </div>
-        </div>
-    </div>
-
-    <div class="container search-results">
+    <div class="container container-narrow search-results">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-10 offset-md-1">
                 <h3>Search Results</h3>
-                    <!--for: <span th:text="${movieList[0].title}"></span></h3>-->
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <ul class="list-group">
-                            <li class="list-group-item" th:each="movie : ${movieList}">
-                                <div class="media">
-                                    <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.getPosterUrl()}">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">
-                                            <a th:text="${movie.getTitle()}"
-                                               class="new-line btn"
-                                               th:href="'/search/'+${movie.getId()}"></a>
-                                        </h5>
+                        <div class="row">
+                            <div class="col-md-4" th:each="movie : ${movieList}">
+                                <div class="movie-card">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-1 movie-title">
+                                                <a th:text="${movie.title}" class="new-line btn movie-title" th:href="'/search/'+${movie.id}"></a>
+                                            </h5>
+                                            <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.posterUrl}">
+                                            <div class="movie-year">
+                                                <b>Year:</b> <span th:text="${movie.year}"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,5 +116,4 @@
     </div>
 </div>
 </body>
-
 </html>
