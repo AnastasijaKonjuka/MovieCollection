@@ -37,6 +37,7 @@ public class ReviewController {
         try {
             if (userId.isEmpty() || userService.verifyAdmin(Integer.valueOf(userId)))
                 throw new RuntimeException("User session expired. Please login to try again");
+
             this.reviewService.createReview(review);
             return "redirect:add-review?status=REVIEW_SUCCESS";
         } catch (Exception exception){

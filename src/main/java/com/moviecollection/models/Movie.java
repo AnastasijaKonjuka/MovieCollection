@@ -28,8 +28,5 @@ public class Movie {
     private Double rating = null;
     private String actors;
 
-    /*
-    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Actor> actors;
-    */
+
 }
