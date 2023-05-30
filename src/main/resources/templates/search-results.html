@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/styles/main-left.css">
     <style>
         .movie-card {
-            display: none; /* Hide movie cards by default */
+            display: none;
             width: calc(33.33% - 20px);
             margin: 80px;
             padding: 20px;
@@ -59,17 +59,28 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="/about" class="nav-link">About</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/search">Search</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item" th:if="${session.loggedIn}">
+                        <a href="/logout" class="nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/login" class="nav-link">Login <i class="fa fa-user" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/register" class="nav-link">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
