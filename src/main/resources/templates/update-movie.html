@@ -1,55 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Update Movie</title>
-  <nav class="movie-nav">
-    <a class="nav-link" href="/add-movie">Add Movie</a>
-    <a class="nav-link" href="/movie-list">Movie List</a>
-    <a class="nav-link" href="/logout">Logout</a>
-  </nav>
+  <title>Update Movie</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/main-left.css">
 </head>
+
 <body>
-<main class="margin-top">
-  <h3 class="margin-top">Update Movie</h3>
-  <form th:action="${'/update-movie/' + movie.getId()}" method="post" class="container">
-    <div class="form-group">
-      <label>Title</label>
-      <input th:value="${movie.getTitle()}" class="form-control" name="title" type="text" required>
+<div class="font-wrapper">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/search">Movie Collection</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+              aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/add-movie">Add Movie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/movie-list">Movie List</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item" th:if="${session.loggedIn}">
+            <a href="/logout" class="nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item" th:unless="${session.loggedIn}">
+            <a href="/login" class="nav-link">Login <i class="fa fa-user" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item" th:unless="${session.loggedIn}">
+            <a href="/register" class="nav-link">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Year</label>
-      <input th:value="${movie.getYear()}" class="form-control" name="year" type="number" required>
+  </nav>
+
+  <div class="container container-narrow">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-left">
+        <h1 class="font-weight-bold">Update Movie</h1>
+        <form th:action="${'/update-movie/' + movie.getId()}" method="post">
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Title</label>
+                <input th:value="${movie.getTitle()}" class="form-control form-control-lg" name="title" type="text" required>
+              </div>
+              <div class="form-group">
+                <label>Year</label>
+                <input th:value="${movie.getYear()}" class="form-control form-control-lg" name="year" type="number" required>
+              </div>
+              <div class="form-group">
+                <label>Genre</label>
+                <input th:value="${movie.getGenre()}" class="form-control form-control-lg" name="genre" type="text" required>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input th:value="${movie.getDescription()}" class="form-control form-control-lg" name="description" type="text" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Runtime</label>
+                <input th:value="${movie.getRuntime()}" class="form-control form-control-lg" name="runtime" type="number" required>
+              </div>
+              <div class="form-group">
+                <label>Trailer URL</label>
+                <input th:value="${movie.getTrailerUrl()}" class="form-control form-control-lg" name="trailerUrl" type="url" required>
+              </div>
+              <div class="form-group">
+                <label>Poster URL</label>
+                <input th:value="${movie.getPosterUrl()}" class="form-control form-control-lg" name="posterUrl" type="url" required>
+              </div>
+              <div class="form-group">
+                <label>Actors</label>
+                <input th:value="${movie.getActors()}" class="form-control form-control-lg" name="actors" type="text" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary red-button" type="submit">Save</button>
+            <button class="btn btn-secondary" type="reset">Clear form</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Genre</label>
-      <input th:value="${movie.getGenre()}" class="form-control" name="genre" type="text" required>
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <input th:value="${movie.getDescription()}" class="form-control" name="description" type="text" required>
-    </div>
-    <div class="form-group">
-      <label>Runtime</label>
-      <input th:value="${movie.getRuntime()}" class="form-control" name="runtime" type="number" required>
-    </div>
-    <div class="form-group">
-      <label>Trailer URL</label>
-      <input th:value="${movie.getTrailerUrl()}" class="form-control" name="trailerUrl" type="url" required>
-    </div>
-    <div class="form-group">
-      <label>Poster URL</label>
-      <input th:value="${movie.getPosterUrl()}" class="form-control" name="posterUrl" type="url" required>
-    </div>
-    <div class="form-group">
-      <label>Actors</label>
-      <input th:value="${movie.getActors()}" class="form-control" name="actors" type="text" required>
-    </div>
-    <div>
-      <button class="button green-theme" type="submit">Save</button>
-      <button class="button red-theme" type="reset">Clear form</button>
-    </div>
-  </form>
-</main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+          integrity="sha384-pzjw8f+uaZu2c+0Em+qXlvFqjjr7vAC9N1o0kY/02Dw2Fh8Tv68v3S4gJJqFq6yN"
+          crossorigin="anonymous"></script>
+</div>
 </body>
+
 </html>

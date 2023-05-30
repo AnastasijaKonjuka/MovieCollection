@@ -1,37 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Movie</title>
+    <style>
+        .movie-image {
+            width: 200px;
+            height: 300px;
+        }
+        .movie-info {
+            margin-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/main-left.css">
 </head>
+
 <body>
-<div class="media">
-    <img class="mr-3 movie-image" alt="Movie Poster" th:src="${movie.posterUrl}" style="width: 200px; height: 300px;">
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">
-            <b th:text="${movie.title}"></b>
-        </h5>
-        <div th:text="${movie.description}"></div>
-        <div th:text="'Runtime: ' + ${movie.runtime} + ' min'"></div>
-        <div>
-            <b>Year:</b> <span th:text="${movie.year}"></span>
-        </div>
-        <div>
-            <b>Genre:</b> <span th:text="${movie.genre}"></span>
-        </div>
-        <div>
-            <b>Trailer:</b>
-            <div>
-                <iframe width="560" height="315" th:src="${movie.trailerUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="font-wrapper">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/search">Movie Collection</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item" th:if="${session.loggedIn}">
+                        <a href="/logout" class="nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/login" class="nav-link">Login <i class="fa fa-user" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.loggedIn}">
+                        <a href="/register" class="nav-link">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div>
-            <b>Rating:</b> <span th:text="${movie.rating}"></span>
-        </div>
-        <div>
-            <b>Actors:</b> <span th:text="${movie.actors}"></span>
+    </nav>
+
+    <div class="container container-narrow">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-left">
+                <h1 class="font-weight-bold">Movie</h1>
+                <div class="media">
+                    <img class="mr-3 movie-image" alt="Movie Poster" th:src="${movie.posterUrl}">
+                    <div class="media-body movie-info">
+                        <h5 class="mt-0 mb-1">
+                            <b th:text="${movie.title}"></b>
+                        </h5>
+                        <div th:text="${movie.description}"></div>
+                        <b>Runtime:</b> <span th:text="${movie.runtime} + ' min'"></span>
+                        <div>
+                            <b>Year:</b> <span th:text="${movie.year}"></span>
+                        </div>
+                        <div>
+                            <b>Genre:</b> <span th:text="${movie.genre}"></span>
+                        </div>
+                        <div>
+                            <b>Trailer:</b>
+                            <div>
+                                <iframe width="560" height="315" th:src="${movie.trailerUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div>
+                            <b>Rating:</b> <span th:text="${movie.rating}"></span>
+                        </div>
+                        <div>
+                            <b>Actors:</b> <span th:text="${movie.actors}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-pzjw8f+uaZu2c+0Em+qXlvFqjjr7vAC9N1o0kY/02Dw2Fh8Tv68v3S4gJJqFq6yN"
+            crossorigin="anonymous"></script>
+
 </div>
 </body>
-</html>

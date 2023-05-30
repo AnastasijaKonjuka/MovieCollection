@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Search Results</title>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/styles/main-left.css">
     <style>
         .movie-card {
-            display: inline-block;
+            display: none; /* Hide movie cards by default */
             width: calc(33.33% - 20px);
             margin: 80px;
             padding: 20px;
@@ -53,10 +53,12 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/search">Movie Collection</a>
-            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
@@ -68,17 +70,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item" th:if="${session.loggedIn}">
-                        <a href="/logout" class="nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="nav-item" th:unless="${session.loggedIn}">
-                        <a href="/login" class="nav-link">Login <i class="fa fa-user" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="nav-item" th:unless="${session.loggedIn}">
-                        <a href="/register" class="nav-link">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
@@ -93,8 +84,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4" th:each="movie : ${movieList}">
-                                <div class="movie-card">
+                            <div class="col-md-4" th:each="movie, movieStat : ${movieList}">
+                                <div class="movie-card" id="movieCard-{movieStat.index}">
                                     <div class="media">
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-1 movie-title">
@@ -109,11 +100,91 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center mt-3">
+                            <nav>
+                                <ul class="pagination" id="pagination">
+                                    <li class="page-item" id="previousPage">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" id="nextPage">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- JavaScript and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    var movieCards = document.querySelectorAll('.movie-card');
+    var previousPageLink = document.getElementById('previousPage');
+    var nextPageLink = document.getElementById('nextPage');
+    var currentPageIndex = 0;
+    var showCount = 3;
+
+    function showMovies(pageIndex) {
+        var startIndex = pageIndex * showCount;
+        var endIndex = startIndex + showCount;
+
+        for (var i = 0; i < movieCards.length; i++) {
+            if (i >= startIndex && i < endIndex) {
+                movieCards[i].style.display = 'inline-block';
+            } else {
+                movieCards[i].style.display = 'none';
+            }
+        }
+    }
+
+    function updatePagination() {
+        if (currentPageIndex === 0) {
+            previousPageLink.style.display = 'none';
+        } else {
+            previousPageLink.style.display = 'inline-block';
+        }
+
+        if (currentPageIndex === Math.ceil(movieCards.length / showCount) - 1) {
+            nextPageLink.style.display = 'none';
+        } else {
+            nextPageLink.style.display = 'inline-block';
+        }
+    }
+
+    function goToPage(pageIndex) {
+        if (pageIndex >= 0 && pageIndex < Math.ceil(movieCards.length / showCount)) {
+            currentPageIndex = pageIndex;
+            showMovies(currentPageIndex);
+            updatePagination();
+        }
+    }
+
+    previousPageLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        goToPage(currentPageIndex - 1);
+    });
+
+    nextPageLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        goToPage(currentPageIndex + 1);
+    });
+
+    // Initialize
+    showMovies(currentPageIndex);
+    updatePagination();
+</script>
 </body>
 </html>
