@@ -56,4 +56,23 @@ body {
     transition: opacity 0.3s ease;
 }
 
+.banner {
+    background-image: url('/images/film.jpg');
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: center;
+    opacity: 0;
+    position: fixed;
+    bottom: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 800px;
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+.banner:hover {
+    opacity: 0.9;
+    bottom: 0;
+}
 
