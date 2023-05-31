@@ -33,7 +33,6 @@
         crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/main-left.css">
 </head>
-
 <body>
 <div class="font-wrapper">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -108,13 +107,13 @@
       </div>
       <div class="col-lg-4 text-left">
         <h3 class="font-weight-bold">Add Review</h3>
-        <form method="post" action="/add-review">
+        <form method="post" th:action="'/search/'+${movie.id}+'/add-review'">
           <div class="form-group">
-            <label for="description">Description</label>
+            <label>Description</label>
             <input name="description" type="text" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="rating">Rating</label>
+            <label>Rating</label>
             <div class="star-rating">
               <input type="radio" id="star5" name="rating" value="5">
               <label for="star5" title="5 stars"><i class="fa fa-star"></i></label>

@@ -1,11 +1,11 @@
 package com.moviecollection.models;
 
 import jakarta.persistence.*;
+import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Timestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +29,11 @@ public class Review {
     private Movie movie;
 
     private String createdAt;
-    private String updatedAt;
+
+    public Review(String description, Integer rating, User user, Movie movie) {
+        this.description = description;
+        this.rating = rating;
+        this.user = user;
+        this.movie = movie;
+    }
 }
