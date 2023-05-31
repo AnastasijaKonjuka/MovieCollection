@@ -2,6 +2,7 @@ package com.moviecollection.controllers;
 import com.moviecollection.models.Review;
 import com.moviecollection.models.ReviewRequest;
 import com.moviecollection.repositories.MovieRepository;
+import com.moviecollection.repositories.ReviewRepository;
 import com.moviecollection.repositories.UserRepository;
 import com.moviecollection.services.MovieService;
 import com.moviecollection.services.ReviewService;
@@ -23,14 +24,16 @@ public class ReviewController {
     private final MovieRepository movieRepository;
     private final UserRepository userRepository;
     private final MovieService movieService;
+    private final ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewController(ReviewService reviewService, UserService userService, MovieRepository movieRepository, UserRepository userRepository, MovieService movieService){
+    public ReviewController(ReviewService reviewService, UserService userService, MovieRepository movieRepository, UserRepository userRepository, MovieService movieService, ReviewRepository reviewRepository){
         this.reviewService = reviewService;
         this.userService = userService;
         this.movieRepository = movieRepository;
         this.userRepository = userRepository;
         this.movieService = movieService;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/search/{id}/add-review")
@@ -38,6 +41,9 @@ public class ReviewController {
         try {
             if (userId.isEmpty() || userService.verifyAdmin(Integer.valueOf(userId)))
                 throw new RuntimeException("User session expired. Please login to try again");
+            if (this.reviewRepository.findReviewByUserAndMovie(this.userRepository.findUserById(Integer.valueOf(userId)), this.movieRepository.findMovieById(id)) != null) {
+                return "redirect:/search/{id}?status=REVIEW_EXISTS";
+            }
             model.addAttribute("movie", this.movieRepository.findMovieById(id));
             return "add-review";
         }  catch (Exception exception) {
@@ -50,6 +56,7 @@ public class ReviewController {
         try {
             if (userId.isEmpty() || userService.verifyAdmin(Integer.valueOf(userId)))
                 throw new RuntimeException("User session expired. Please login to try again");
+
             Review review = new Review(
                     reviewRequest.getDescription(),
                     reviewRequest.getRating(),
@@ -60,10 +67,10 @@ public class ReviewController {
             this.movieService.updateRating(this.movieRepository.findMovieById(id));
             this.movieRepository.save(this.movieRepository.findMovieById(id));
 
-            return "redirect:add-review?status=REVIEW_SUCCESS";
+            return "redirect:/search/{id}?status=REVIEW_SUCCESS";
         } catch (Exception exception){
             exception.printStackTrace();
-            return "redirect:add-review?status=REVIEW_FAILED&message="+exception.getMessage();
+            return "redirect:/search/{id}?status=REVIEW_FAILED&message="+exception.getMessage();
         }
     }
 

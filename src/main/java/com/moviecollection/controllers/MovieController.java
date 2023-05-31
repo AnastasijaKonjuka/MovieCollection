@@ -187,6 +187,7 @@ class MovieController {
     @GetMapping("/search/{id}")
     public String showMoviePage(@PathVariable Integer id, Model model) {
         model.addAttribute("movie", this.movieRepository.findMovieById(id));
+        model.addAttribute("reviewList", this.reviewRepository.findAllByMovie(this.movieRepository.findMovieById(id)));
         return "movie";
     }
 
