@@ -25,8 +25,18 @@ public class Movie {
     private Integer runtime;
     private String trailerUrl;
     private String posterUrl;
-    private Double rating = null;
+    private Double rating;
     private String actors;
 
-
+    public Movie(Integer id, String title, Integer year, String genre, String description, Integer runtime, String trailerUrl, String posterUrl, String actors) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.genre = genre;
+        this.description = description;
+        this.runtime = runtime;
+        this.trailerUrl = trailerUrl;
+        this.posterUrl = posterUrl;
+        this.actors = actors;
+    }
 }

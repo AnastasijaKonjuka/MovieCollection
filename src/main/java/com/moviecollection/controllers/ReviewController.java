@@ -58,6 +58,7 @@ public class ReviewController {
             );
             this.reviewService.createReview(review);
             this.movieService.updateRating(this.movieRepository.findMovieById(id));
+            this.movieRepository.save(this.movieRepository.findMovieById(id));
 
             return "redirect:add-review?status=REVIEW_SUCCESS";
         } catch (Exception exception){

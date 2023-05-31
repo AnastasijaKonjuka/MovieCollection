@@ -42,7 +42,6 @@ public class MovieService {
         if (rating > 5.0) rating = 5.0;
 
         this.movieRepository.findMovieById(movie.getId()).setRating(rating);
-        System.out.println(rating);
     }
 
 }
