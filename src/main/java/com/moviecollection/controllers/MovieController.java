@@ -2,8 +2,10 @@ package com.moviecollection.controllers;
 
 import com.moviecollection.models.Movie;
 import com.moviecollection.models.MovieRequest;
+import com.moviecollection.models.Review;
 import com.moviecollection.models.SearchRequest;
 import com.moviecollection.repositories.MovieRepository;
+import com.moviecollection.repositories.ReviewRepository;
 import com.moviecollection.services.MovieService;
 import com.moviecollection.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,15 @@ class MovieController {
     private final UserService userService;
     private final MovieService movieService;
     private final MovieRepository movieRepository;
+    private final ReviewRepository reviewRepository;
 
 
     @Autowired
-    public MovieController(UserService userService, MovieService movieService, MovieRepository movieRepository) {
+    public MovieController(UserService userService, MovieService movieService, MovieRepository movieRepository, ReviewRepository reviewRepository) {
         this.userService = userService;
         this.movieService = movieService;
         this.movieRepository = movieRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/add-movie")
@@ -105,7 +109,10 @@ class MovieController {
     public String deleteMovie(@CookieValue(value="loggedInUserId", defaultValue = "") String userId, @PathVariable Integer movieId) throws Exception {
        try{
            if (userId.isEmpty() || !userService.verifyAdmin(Integer.valueOf(userId))) throw new RuntimeException("Admin session expired. Please login to try again");
-
+           List<Review> reviewToDelete = this.reviewRepository.findAllByMovie(this.movieRepository.findMovieById(movieId));
+           for (Review review : reviewToDelete) {
+               this.reviewRepository.delete(review);
+           }
            this.movieService.deleteMovie(movieId);
            return "redirect:/movie-list?message=MOVIE DELETED";
     } catch (Exception exception) {
