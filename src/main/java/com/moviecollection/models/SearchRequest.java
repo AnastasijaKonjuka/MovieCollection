@@ -11,5 +11,5 @@ public class SearchRequest {
     private String title;
     private String genre;
     private String actors;
-    private Double rating;
+    private String rating;
 }
