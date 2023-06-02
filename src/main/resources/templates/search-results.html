@@ -12,12 +12,19 @@
     <link rel="stylesheet" href="/styles/main-left.css">
     <style>
         .movie-card {
-            display: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
             width: calc(33.33% - 20px);
-            margin: 80px;
+            margin: 0 20px 20px;
             padding: 20px;
             border-radius: 5px;
             box-shadow: none;
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-end;
         }
 
         .movie-image {

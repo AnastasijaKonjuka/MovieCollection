@@ -100,7 +100,7 @@
                             <a th:href="'/search/' + ${movie.id} + '/add-review'" class="btn btn-primary red-button">Add Review</a>
                         </div>
                         <div>
-                            <b>Rating:</b>
+                            <b>Rating:</b> <b th:text="${movie.rating}"></b> based on <span th:text="${#lists.size(reviewList)}"></span> review(s)
                             <div class="star-rating" th:data-rating="${movie.rating}">
                                 <input type="radio" id="star5" name="rating" value="5" th:checked="${movie.rating == 5}" />
                                 <label for="star5" title="5 stars" data-value="5" class="fa fa-star"></label>
@@ -114,7 +114,7 @@
                                 <label for="star1" title="1 star" data-value="1" class="fa fa-star"></label>
                             </div>
                         </div>
-                    </div>
+                       </div>
                 </div>
             </div>
 
@@ -174,6 +174,7 @@
             $('.star-rating label').slice(-rating).addClass('active');
         });
     </script>
+
 </div>
 </body>
 

@@ -117,17 +117,17 @@
               <a th:href="'/search/' + ${movie.id} + '/add-review'" class="btn btn-primary red-button">Add Review</a>
             </div>
             <div>
-              <label>Rating</label>
+              <b>Rating:</b> <b th:text="${movie.rating}"></b>
               <div class="star-rating-two">
-                <input type="radio" id="star10" name="rating" value="5">
+                <input type="radio" id="star10" name="rating" value="5" th:checked="${movie.rating == 5}">
                 <label for="star10" title="5 stars" data-value="5"><i class="fa fa-star"></i></label>
-                <input type="radio" id="star9" name="rating" value="4">
+                <input type="radio" id="star9" name="rating" value="4" th:checked="${movie.rating == 4}">
                 <label for="star9" title="4 stars" data-value="4"><i class="fa fa-star"></i></label>
-                <input type="radio" id="star8" name="rating" value="3">
+                <input type="radio" id="star8" name="rating" value="3" th:checked="${movie.rating == 3}">
                 <label for="star8" title="3 stars" data-value="3"><i class="fa fa-star"></i></label>
-                <input type="radio" id="star7" name="rating" value="2">
+                <input type="radio" id="star7" name="rating" value="2" th:checked="${movie.rating == 2}">
                 <label for="star7" title="2 stars" data-value="2"><i class="fa fa-star"></i></label>
-                <input type="radio" id="star6" name="rating" value="1">
+                <input type="radio" id="star6" name="rating" value="1" th:checked="${movie.rating == 1}">
                 <label for="star6" title="1 star" data-value="1"><i class="fa fa-star"></i></label>
               </div>
             </div>
@@ -185,6 +185,7 @@
           <div class="form-group">
             <button class="btn btn-primary red-button" type="submit">Save</button>
             <button class="btn btn-secondary" type="reset">Clear form</button>
+
           </div>
         </form>
       </div>
