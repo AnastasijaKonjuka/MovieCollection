@@ -9,13 +9,15 @@
             width: 200px;
             height: 300px;
         }
+
         .movie-info {
             margin-top: 20px;
         }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/main-left.css">
 </head>
@@ -80,7 +82,8 @@
                         <div>
                             <b>Trailer:</b>
                             <div>
-                                <iframe width="560" height="315" th:src="${movie.trailerUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="560" height="315" th:src="${movie.trailerUrl}" frameborder="0"
+                                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </div>
                         </div>
                         <div>
@@ -92,8 +95,21 @@
                     </div>
                 </div>
                 <div>
-                    <a th:href="'/search/'+${movie.id}+'/add-review'" class="btn btn-primary red-button">Add Review</a>
+                    <a th:href="'/search/' + ${movie.id} + '/add-review'" class="btn btn-primary red-button">Add Review</a>
                 </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h2>Reviews</h2>
+                <ul>
+                    <li th:each="review : ${reviewList}">
+                        <div>
+                            <h4><b>User:</b> <span th:text="${review.user}"></span></h4>
+                            <p><b>Rating:</b> <span th:text="${review.rating}"></span></p>
+                            <p><b>Comment:</b> <span th:text="${review.comment}"></span></p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -105,3 +121,5 @@
 
 </div>
 </body>
+
+</html>
