@@ -123,7 +123,7 @@
       </div>
       <div class="col-lg-4 text-left">
         <h3 class="font-weight-bold">Add Review</h3>
-        <form method="post" action="/add-review">
+        <form method="post" th:action="'/search/'+${movie.id}+'/add-review'">
           <div class="form-group">
             <label>Description</label>
             <input name="description" type="text" class="form-control review-description" required>
