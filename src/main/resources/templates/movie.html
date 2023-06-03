@@ -41,6 +41,7 @@
             margin-top: 20px;
         }
 
+
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
@@ -119,9 +120,8 @@
             </div>
 
             <div class="col-lg-5">
-                <h1 class="font-weight-bold">Movie</h1>
+                <h1 class="font-weight-bold"><b th:text="${movie.title}"></b></h1>
                 <h5 class="mt-0 mb-1">
-                    <b th:text="${movie.title}"></b>
                 </h5>
                 <div th:text="${movie.description}"></div>
                 <div>
@@ -133,11 +133,13 @@
                 <div>
                     <b>Genre:</b> <span th:text="${movie.genre}"></span>
                 </div>
-                <div>
+                <div class="trailer-container">
                     <b>Trailer:</b>
                     <div>
-                        <iframe width="450" height="281" th:src="${movie.trailerUrl}" frameborder="0"
-                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <div class="trailer-wrapper">
+                            <iframe width="450" height="281" th:src="${movie.trailerUrl}" frameborder="0"
+                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
                 <div class="actors"><b>Actors:</b> <span th:text="${movie.actors}"></span></div>
@@ -148,7 +150,7 @@
                 <ul>
                     <li th:each="review : ${reviewList}">
                         <div>
-                            <h4><b>User:</b> <span th:text="${review.user.name}"></span></h4>
+                            <h4><span th:text="${review.user.name}"></span></h4>
                             <p><b>Rating:</b>
                                 <span class="star-rating">
                                 <span th:each="i : ${#numbers.sequence(1, review.rating)}"
