@@ -59,7 +59,19 @@
                 <a class="btn btn-light btn-lg" href="/search" role="button">
                     <i class="fa fa-film" aria-hidden="true"></i> Find your new favorite movie
                 </a>
-                <div class="banner"></div>
+                <div class="banner">
+                    <h4>Top Movies:</h4>
+                    <ul class="movie-list">
+                        <li th:each="movie : ${topMoviesList}">
+                            <div class="movie-item">
+                                <h5 class="mt-0 mb-1 movie-title">
+                                    <a th:text="${movie.title}" class="new-line btn movie-title" th:href="'/search/'+${movie.id}"></a>
+                                </h5>
+                                <img class="poster-image" th:src="${movie.posterUrl}" alt="Movie Poster" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

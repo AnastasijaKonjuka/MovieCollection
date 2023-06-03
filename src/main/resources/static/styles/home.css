@@ -75,4 +75,58 @@ body {
     opacity: 0.9;
     bottom: 0;
 }
+.banner {
+    text-align: center;
+    padding: 200px 100px;
+}
 
+.banner h4 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: black
+}
+
+.banner ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.banner li {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.movie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 10px;
+    flex-grow: 1;
+}
+
+.poster-image {
+    width: 150px;
+    height: 225px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.movie-title {
+    color: black;
+    transition: color 0.3s ease-in-out;
+    margin-bottom: 5px;
+    width: 80%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
