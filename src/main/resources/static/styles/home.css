@@ -77,7 +77,7 @@ body {
 }
 .banner {
     text-align: center;
-    padding: 200px 100px;
+    padding: 200px 60px;
 }
 
 .banner h4 {
@@ -122,7 +122,7 @@ body {
     color: black;
     transition: color 0.3s ease-in-out;
     margin-bottom: 5px;
-    width: 80%;
+    width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
