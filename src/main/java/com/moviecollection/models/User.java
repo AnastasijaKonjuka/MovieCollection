@@ -21,7 +21,7 @@ public class User {
     private Integer id;
 
     @NotBlank(message = "Name is mandatory")
-    @Pattern(regexp = "^[{\\p{L}}{0-9}]{2,100}$", message = "Name is not valid. No special characters should be used and size should be between 2 and 100.")
+    @Pattern(regexp = "^[{a-zA-Z0-9]{2,100}$", message = "Name is not valid. No special characters should be used and size should be between 2 and 100.")
     private String name;
     
     private String role = "user";

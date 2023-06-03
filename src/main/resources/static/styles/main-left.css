@@ -45,3 +45,11 @@ body {
 .form-group {
     margin-bottom: 20px;
 }
+
+.error-message {
+    display: none;
+}
+
+input:not(:placeholder-shown):not(:focus):invalid + .error-message{
+    display: block;
+}

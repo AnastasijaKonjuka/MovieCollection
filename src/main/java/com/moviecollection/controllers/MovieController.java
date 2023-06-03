@@ -127,6 +127,33 @@ class MovieController {
         return "search";
     }
 
+
+    @PostMapping("/search")
+    public String handleSearch(SearchRequest searchRequest, Model model) {
+        String title = searchRequest.getTitle();
+        String genre = searchRequest.getGenre();
+        String actors = searchRequest.getActors();
+        String rating = searchRequest.getRating();
+
+        model.addAttribute("movieList", this.movieService.movieSearch(title, genre, actors, rating));
+
+        return "search-results";
+    }
+
+    @GetMapping("/search/{id}")
+    public String showMoviePage(@PathVariable Integer id, Model model) {
+        model.addAttribute("movie", this.movieRepository.findMovieById(id));
+        model.addAttribute("reviewList", this.reviewRepository.findAllByMovie(this.movieRepository.findMovieById(id)));
+        return "movie";
+    }
+
+    @GetMapping("/")
+    public String showMovieTop(Model model) {
+        model.addAttribute("topMoviesList",this.movieRepository.findTop3ByOrderByRatingDesc());
+        return "index";
+    }
+
+        /*
     @PostMapping("/search")
     public String handleSearch(SearchRequest searchRequest, Model model) {
         String title = searchRequest.getTitle();
@@ -184,28 +211,6 @@ class MovieController {
 
         return "search-results";
     }
-
-    @GetMapping("/search/{id}")
-    public String showMoviePage(@PathVariable Integer id, Model model) {
-        model.addAttribute("movie", this.movieRepository.findMovieById(id));
-        model.addAttribute("reviewList", this.reviewRepository.findAllByMovie(this.movieRepository.findMovieById(id)));
-        return "movie";
-    }
-
-
-    @GetMapping("/")
-    public String showMovieTop(Model model) {
-        model.addAttribute("topMoviesList",this.movieRepository.findTop3ByOrderByRatingDesc());
-        System.out.println(this.movieRepository.findTop3ByOrderByRatingDesc());
-        return "index";
-    }
-
-
-
-
-
-
-
-
+    */
 }
 

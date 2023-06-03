@@ -2,10 +2,12 @@ package com.moviecollection.services;
 
 import com.moviecollection.models.Movie;
 import com.moviecollection.models.Review;
+import com.moviecollection.models.SearchRequest;
 import com.moviecollection.repositories.MovieRepository;
 import com.moviecollection.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -42,6 +44,71 @@ public class MovieService {
         if (rating > 5.0) rating = 5.0;
 
         this.movieRepository.findMovieById(movie.getId()).setRating(rating);
+    }
+
+    public List<Movie> movieSearch(String title, String genre, String actors, String rating) {
+
+        if (!title.isEmpty() && genre.isEmpty() && actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCase(title);
+        }
+
+        if (title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByGenre(genre);
+        }
+
+        if (title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByActorsContainingIgnoreCase(actors);
+        }
+
+        if (title.isEmpty() && genre.isEmpty() && actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByRatingIsGreaterThanEqual(Double.parseDouble(rating));
+        }
+
+        if (!title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndActorsContainingIgnoreCaseAndRatingIsGreaterThanEqual(title, genre, actors, Double.parseDouble(rating));
+        }
+
+        if (!title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenre(title, genre);
+        }
+
+        if (!title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndActorsContainingIgnoreCase(title, actors);
+        }
+
+        if (!title.isEmpty() && genre.isEmpty() && actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndRatingIsGreaterThanEqual(title, Double.parseDouble(rating));
+        }
+
+        if (title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByGenreAndActorsContainingIgnoreCase(genre, actors);
+        }
+
+        if (title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByGenreAndRatingIsGreaterThanEqual(genre, Double.parseDouble(rating));
+        }
+
+        if (title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByActorsAndRatingIsGreaterThanEqual(actors, Double.parseDouble(rating));
+        }
+
+        if (!title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && rating == null) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndActorsContainingIgnoreCase(title, genre, actors);
+        }
+
+        if (!title.isEmpty() && !genre.isEmpty() && actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndGenreAndRatingIsGreaterThanEqual(title, genre, Double.parseDouble(rating));
+        }
+
+        if (!title.isEmpty() && genre.isEmpty() && !actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByTitleContainingIgnoreCaseAndActorsContainingIgnoreCaseAndRatingIsGreaterThanEqual(title, actors, Double.parseDouble(rating));
+        }
+
+        if (title.isEmpty() && !genre.isEmpty() && !actors.isEmpty() && !(rating == null)) {
+            return this.movieRepository.findAllByGenreAndActorsContainingIgnoreCaseAndRatingIsGreaterThanEqual(genre, actors, Double.parseDouble(rating));
+        }
+
+        return this.movieRepository.findAll();
     }
 
 }
