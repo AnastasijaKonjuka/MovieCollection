@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Search</title>
@@ -82,11 +82,7 @@
                         <label>Genre</label>
                         <select name="genre" class="form-control form-control-lg">
                             <option value="">Select Genre</option>
-                            <option value="Action">Action</option>
-                            <option value="Adventure">Adventure</option>
-                            <option value="Comedy">Comedy</option>
-                            <option value="Drama">Drama</option>
-                            <option value="Crime">Crime</option>
+                            <option th:each="genre : ${genreList}" th:value="${genre}" th:text="${genre}"></option>
                         </select>
                     </div>
                     <div class="form-group">

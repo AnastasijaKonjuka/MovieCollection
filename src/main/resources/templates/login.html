@@ -71,7 +71,7 @@
                 </form>
                 <section th:if="${status != null}">
                     <div th:if="${status == 'REGISTER_SUCCESS'}">
-                        <span class="green-theme">Account created successfully, Please login to continue</span>
+                        <span class="green-theme">Account created successfully, Please log in to continue</span>
                     </div>
                     <div th:if="${status == 'LOGIN_FAILED'}">
                         <span class="red-theme" th:text="${message}"></span>
