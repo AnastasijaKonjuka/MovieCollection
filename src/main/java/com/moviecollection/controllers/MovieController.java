@@ -15,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -123,7 +126,13 @@ class MovieController {
     }
 
     @GetMapping("/search")
-    public String showSearchPage() {
+    public String showSearchPage(Model model) {
+        List<Movie> movies = this.movieRepository.findAll();
+        List<String> allGenres = movies.stream()
+                .map(Movie::getGenre)
+                .collect(Collectors.toList());
+        List<String> genres = new ArrayList<>(new HashSet<>(allGenres));
+        model.addAttribute("genreList", genres);
         return "search";
     }
 

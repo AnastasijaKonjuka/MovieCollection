@@ -1,10 +1,10 @@
 package com.moviecollection.models;
 
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.sql.Timestamp;
 
 
 @AllArgsConstructor
@@ -28,7 +28,11 @@ public class Review {
     @JoinColumn(name="movieId")
     private Movie movie;
 
-    private String createdAt;
+    Timestamp createdAt;
+    @PrePersist
+    public void beforeSave(){
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     public Review(String description, Integer rating, User user, Movie movie) {
         this.description = description;

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,8 +39,9 @@ public class User {
     @NotBlank(message = "Date of birth is mandatory")
     private Date dateOfBirth;
 
-
-    private String createdAt;
-    private String updatedAt;
-
+    Timestamp createdAt;
+    @PrePersist
+    public void beforeSave(){
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 }
