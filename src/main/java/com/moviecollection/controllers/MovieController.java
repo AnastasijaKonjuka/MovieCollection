@@ -118,7 +118,7 @@ class MovieController {
                this.reviewRepository.delete(review);
            }
            this.movieService.deleteMovie(movieId);
-           return "redirect:/movie-list?message=MOVIE DELETED";
+           return "redirect:/movie-list?message=MOVIE_DELETED";
     } catch (Exception exception) {
         exception.printStackTrace();
         return "redirect:/movie-list?status=FAILED_TO_DELETE&message=" + exception.getMessage();

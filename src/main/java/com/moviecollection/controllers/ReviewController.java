@@ -47,7 +47,7 @@ public class ReviewController {
             model.addAttribute("movie", this.movieRepository.findMovieById(id));
             return "add-review";
         }  catch (Exception exception) {
-            return "redirect:login?status=REVIEW_ERROR&message=" + exception.getMessage();
+            return "redirect:/login?status=REVIEW_ERROR&message=" + exception.getMessage();
         }
     }
 

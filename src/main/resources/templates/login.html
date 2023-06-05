@@ -76,6 +76,9 @@
                     <div th:if="${status == 'LOGIN_FAILED'}">
                         <span class="red-theme" th:text="${message}"></span>
                     </div>
+                    <div th:if="${status == 'REVIEW_ERROR'}">
+                        <span class="red-theme" th:text="${message}"></span>
+                    </div>
                 </section>
             </div>
         </div>
