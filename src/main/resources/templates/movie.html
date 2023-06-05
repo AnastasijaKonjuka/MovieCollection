@@ -40,7 +40,10 @@
         .add-review-button {
             margin-top: 20px;
         }
-
+        .review-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -155,17 +158,19 @@
 
             <div class="col-lg-4">
                 <h2>Reviews</h2>
-                <ul>
+                <ul class="review-list">
                     <li th:each="review : ${reviewList}">
                         <div>
-                            <h4><span th:text="${review.user.name}"></span></h4>
-                            <p><b>Rating:</b>
+                            <h4><span th:text="${review.user.name}"></span></h4><span th:text="${review.createdAt}"></span>
+                            <p>
+                                <b>Rating:</b>
                                 <span class="star-rating">
-                                <span th:each="i : ${#numbers.sequence(1, review.rating)}"
-                                      class="fa fa-star"></span>
-                            </span>
+                        <span th:each="i : ${#numbers.sequence(1, review.rating)}"
+                              class="fa fa-star"></span>
+                    </span>
                             </p>
                             <p><b>Comment:</b> <span th:text="${review.description}"></span></p>
+                            <p></p>
                         </div>
                     </li>
                 </ul>
