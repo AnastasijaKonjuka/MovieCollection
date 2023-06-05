@@ -171,7 +171,7 @@
         <form method="post" th:action="'/search/'+${movie.id}+'/add-review'">
           <div class="form-group">
             <label>Description</label>
-            <textarea name="description" class="form-control review-description" required></textarea>
+            <textarea name="description" class="form-control review-description" required maxlength="400"></textarea>
           </div>
           <div class="form-group">
             <label>Rating</label>

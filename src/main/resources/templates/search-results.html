@@ -116,7 +116,9 @@
                                             <h5 class="mt-0 mb-1 movie-title">
                                                 <a th:text="${movie.title}" class="new-line btn movie-title" th:href="'/search/'+${movie.id}"></a>
                                             </h5>
-                                            <img class="mr-3 movie-image" alt="Movie Image" th:src="${movie.posterUrl}">
+                                            <a th:href="'/search/' + ${movie.id}">
+                                                <img class="mr-3 movie-image" th:src="${movie.posterUrl}" alt="Movie Image" />
+                                            </a>
                                             <div class="movie-year">
                                                 <b>Year:</b> <span th:text="${movie.year}"></span>
                                             </div>

@@ -61,7 +61,7 @@ body {
     background-repeat: repeat-y;
     background-size: contain;
     background-position: center;
-    opacity: 0;
+    opacity: 0.9;
     position: fixed;
     bottom: -700px;
     left: 50%;
