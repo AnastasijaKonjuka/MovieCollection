@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @AllArgsConstructor
@@ -28,10 +30,10 @@ public class Review {
     @JoinColumn(name="movieId")
     private Movie movie;
 
-    Timestamp createdAt;
+    private LocalDate createdAt;
     @PrePersist
-    public void beforeSave(){
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+    private void init(){
+        createdAt = LocalDate.now();
     }
 
     public Review(String description, Integer rating, User user, Movie movie) {
