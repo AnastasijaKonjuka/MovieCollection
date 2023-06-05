@@ -193,14 +193,6 @@
             <button class="btn btn-secondary" type="reset">Clear form</button>
           </div>
         </form>
-        <section th:if="${status != null}">
-          <div th:if="${status == 'REVIEW_SUCCESS'}">
-            <span class="green-theme">Review added successfully</span>
-          </div>
-          <div th:if="${status == 'REVIEW_FAILED'}">
-            <span class="red-theme" th:text="${message}"></span>
-          </div>
-        </section>
       </div>
     </div>
   </div>

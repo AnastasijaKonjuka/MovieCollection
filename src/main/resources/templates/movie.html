@@ -115,6 +115,14 @@
                                 <label for="star1" title="1 star" data-value="1" class="fa fa-star"></label>
                             </div>
                         </div>
+                        <section th:if="${param.status != null}">
+                            <div th:if="${param.status == 'REVIEW_SUCCESS'}">
+                                <span class="green-theme">Review added successfully</span>
+                            </div>
+                            <div th:if="${param.status == 'REVIEW_EXISTS'}">
+                                <span class="red-theme">Review already exists</span>
+                            </div>
+                        </section>
                        </div>
                 </div>
             </div>
