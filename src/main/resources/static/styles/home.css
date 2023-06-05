@@ -77,12 +77,15 @@ body {
 }
 .banner {
     text-align: center;
-    padding: 200px 60px;
+    padding-top: 20px;
+    padding-bottom: 300px;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
 .banner h4 {
     margin-bottom: 10px;
-    font-size: 24px;
+    font-size: 26px;
     color: black
 }
 
