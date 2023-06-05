@@ -62,7 +62,7 @@
                 No movies to display
             </div>
             <ul th:if="${!movieList.isEmpty()}">
-                <li th:each="movie: ${movieList}">
+                <li th:each="movie: ${movieList}" style="margin-bottom: 10px;">
                     <span th:text="${movie.getId()}"></span>
                     <span th:text="${movie.getTitle()}"></span>
                     <a class="btn btn-secondary" th:href="${'/update-movie/' + movie.getId()}">Update</a>
