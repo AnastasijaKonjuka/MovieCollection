@@ -25,7 +25,11 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterPage() {
+    public String showRegisterPage(@RequestParam(name = "status", required = false) String status,
+                                   @RequestParam(name = "message", required = false) String message,
+                                   Model model) {
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         return "register";
     }
 

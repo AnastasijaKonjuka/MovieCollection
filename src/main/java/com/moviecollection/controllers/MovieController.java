@@ -150,7 +150,10 @@ class MovieController {
     }
 
     @GetMapping("/search/{id}")
-    public String showMoviePage(@PathVariable Integer id, Model model) {
+    public String showMoviePage(@PathVariable Integer id, Model model, @RequestParam(name = "status", required = false) String status,
+                                @RequestParam(name = "message", required = false) String message){
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         model.addAttribute("movie", this.movieRepository.findMovieById(id));
         model.addAttribute("reviewList", this.reviewRepository.findAllByMovie(this.movieRepository.findMovieById(id)));
         return "movie";
