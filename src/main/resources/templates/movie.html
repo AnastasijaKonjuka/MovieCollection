@@ -123,7 +123,7 @@
                                 <span class="green-theme">Review added successfully</span>
                             </div>
                             <div th:if="${status == 'REVIEW_EXISTS'}">
-                                <span class="red-theme">Review already exists</span>
+                                <span class="red-theme">You have added review for this movie already</span>
                             </div>
                         </section>
                        </div>
@@ -173,6 +173,7 @@
                             <p></p>
                         </div>
                     </li>
+                    <i th:if="${reviewList.isEmpty()}">There are no reviews yet. Do you want to be first?</i>
                 </ul>
             </div>
         </div>
