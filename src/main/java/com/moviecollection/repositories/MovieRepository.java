@@ -1,11 +1,9 @@
 package com.moviecollection.repositories;
 
 import com.moviecollection.models.Movie;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

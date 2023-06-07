@@ -2,12 +2,10 @@ package com.moviecollection.services;
 
 import com.moviecollection.models.Movie;
 import com.moviecollection.models.Review;
-import com.moviecollection.models.SearchRequest;
 import com.moviecollection.repositories.MovieRepository;
 import com.moviecollection.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 

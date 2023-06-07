@@ -62,7 +62,7 @@ public class UserController {
             if (loggedInUser == null) throw new RuntimeException("User not found");
 
             Cookie cookie = new Cookie("loggedInUserId", loggedInUser.getId().toString());
-            cookie.setMaxAge(60*60*3); //time in seconds how long cookie will be saved in users browser
+            cookie.setMaxAge(60*60*3);
             response.addCookie(cookie);
 
             session.setAttribute("loggedIn", true);

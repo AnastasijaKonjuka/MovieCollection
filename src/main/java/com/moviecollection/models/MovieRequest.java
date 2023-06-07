@@ -26,6 +26,4 @@ public class MovieRequest {
     private Double rating;
     private String actors;
 
-
-
 }
