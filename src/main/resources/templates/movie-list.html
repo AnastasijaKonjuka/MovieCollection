@@ -11,17 +11,6 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/main-left.css">
-    <style>
-        .movie-item {
-            margin-bottom: 10px;
-        }
-
-        @media (min-width: 576px) {
-            .two-column {
-                column-count: 2;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -72,8 +61,8 @@
             <div th:if="${movieList.isEmpty()}">
                 No movies to display
             </div>
-            <ul th:if="${!movieList.isEmpty()}" class="two-column">
-                <li th:each="movie: ${movieList}" class="movie-item">
+            <ul th:if="${!movieList.isEmpty()}">
+                <li th:each="movie: ${movieList}" style="margin-bottom: 10px;">
                     <span th:text="${movie.getId()}"></span>
                     <span th:text="${movie.getTitle()}"></span>
                     <a class="btn btn-secondary" th:href="${'/update-movie/' + movie.getId()}">Update</a>
