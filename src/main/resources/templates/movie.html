@@ -105,17 +105,17 @@
                         </div>
                         <div>
                             <b>Rating:</b> <b th:text="${movie.rating}"></b> based on <span th:text="${#lists.size(reviewList)}"></span> review(s)
-                            <div class="star-rating" th:data-rating="${movie.rating}">
-                                <input type="radio" id="star5" name="rating" value="5" th:checked="${movie.rating == 5}" />
-                                <label for="star5" title="5 stars" data-value="5" class="fa fa-star"></label>
-                                <input type="radio" id="star4" name="rating" value="4" th:checked="${movie.rating == 4}" />
-                                <label for="star4" title="4 stars" data-value="4" class="fa fa-star"></label>
-                                <input type="radio" id="star3" name="rating" value="3" th:checked="${movie.rating == 3}" />
-                                <label for="star3" title="3 stars" data-value="3" class="fa fa-star"></label>
-                                <input type="radio" id="star2" name="rating" value="2" th:checked="${movie.rating == 2}" />
-                                <label for="star2" title="2 stars" data-value="2" class="fa fa-star"></label>
-                                <input type="radio" id="star1" name="rating" value="1" th:checked="${movie.rating == 1}" />
-                                <label for="star1" title="1 star" data-value="1" class="fa fa-star"></label>
+                            <div class="star-rating">
+                                <input type="radio" id="star10" name="rating" value="5" th:checked="${movie.rating == 5}">
+                                <label for="star10" title="5 stars" data-value="5"><i class="fa fa-star"></i></label>
+                                <input type="radio" id="star9" name="rating" value="4" th:checked="${movie.rating == 4}">
+                                <label for="star9" title="4 stars" data-value="4"><i class="fa fa-star"></i></label>
+                                <input type="radio" id="star8" name="rating" value="3" th:checked="${movie.rating == 3}">
+                                <label for="star8" title="3 stars" data-value="3"><i class="fa fa-star"></i></label>
+                                <input type="radio" id="star7" name="rating" value="2" th:checked="${movie.rating == 2}">
+                                <label for="star7" title="2 stars" data-value="2"><i class="fa fa-star"></i></label>
+                                <input type="radio" id="star6" name="rating" value="1" th:checked="${movie.rating == 1}">
+                                <label for="star6" title="1 star" data-value="1"><i class="fa fa-star"></i></label>
                             </div>
                         </div>
                         <section th:if="${status != null}">
