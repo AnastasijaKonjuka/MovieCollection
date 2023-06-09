@@ -8,7 +8,7 @@ Made using:
 
 Information about the project:
 
-- Registration with admin or user role. 
+- Registration with admin role available via Postman, users register using the web app. 
 - You need a strong password to sign up for the app.
 - Accounts with the admin role can add, update, or delete movies.
 - Users can rate movies and write reviews, also search movies and see movie details. 
