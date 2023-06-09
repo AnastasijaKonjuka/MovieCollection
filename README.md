@@ -8,6 +8,10 @@ Made using:
 
 Information about the project:
 
+A web page - movie database, where users can choose a Movie to watch, considering Movie ratings and reviews. Users can also register and login, rate Movies and write their own reviews. No actual Movies stored, just Movie’s information. Movie rating is calculated based on users' reviews.
+Administrator can login and update Movie database through web page: add, delete, update Movies. 
+Example of existing similar solution: IMDb.
+
 - Registration with admin role available via Postman, users register using the web app. 
 - You need a strong password to sign up for the app.
 - Accounts with the admin role can add, update, or delete movies.
