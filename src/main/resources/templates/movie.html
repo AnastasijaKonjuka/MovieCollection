@@ -103,18 +103,21 @@
                         <div class="add-review-button">
                             <a th:href="'/search/' + ${movie.id} + '/add-review'" class="btn btn-primary red-button">Add Review</a>
                         </div>
-                        <div>
-                            <b>Rating:</b> <b th:text="${movie.rating}"></b> based on <span th:text="${#lists.size(reviewList)}"></span> review(s)
+                        <div th:if="${movie.rating != null}">
+                            <b>Rating:</b> <b th:text="${movie.rating}"></b> <b>/ 5</b> based on <span th:text="${#lists.size(reviewList)}"></span> review(s)
+                        </div>
+                        <div th:if="${movie.rating == null}">
+                            <b>No rating available yet</b>
                         </div>
                         <section th:if="${status != null}">
                             <div th:if="${status == 'REVIEW_SUCCESS'}">
                                 <span class="green-theme">Review added successfully</span>
                             </div>
                             <div th:if="${status == 'REVIEW_EXISTS'}">
-                                <span class="red-theme">You have added review for this movie already</span>
+                                <span class="red-theme">You have added a review for this movie already</span>
                             </div>
                         </section>
-                       </div>
+                    </div>
                 </div>
             </div>
 

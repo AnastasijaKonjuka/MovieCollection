@@ -50,10 +50,6 @@
       margin-bottom: 10px;
     }
 
-    .movie-info > div.actors {
-      margin-top: 20px;
-    }
-
     .add-review-button {
       margin-top: 20px;
     }
@@ -123,8 +119,11 @@
             <div class="add-review-button">
               <a th:href="'/search/' + ${movie.id} + '/add-review'" class="btn btn-primary red-button">Add Review</a>
             </div>
-            <div>
-              <b>Rating:</b> <b th:text="${movie.rating}"></b>
+            <div th:if="${movie.rating != null}">
+              <b>Rating:</b> <b th:text="${movie.rating}"></b> <b>/ 5</b>
+            </div>
+            <div th:if="${movie.rating == null}">
+              <b>No rating available yet</b>
             </div>
           </div>
         </div>

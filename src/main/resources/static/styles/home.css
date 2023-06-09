@@ -77,10 +77,7 @@ body {
 }
 .banner {
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 300px;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding: 20px 70px 300px;
 }
 
 .banner h4 {
