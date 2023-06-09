@@ -18,9 +18,9 @@ Information about the project:
 How to run the application?
 
 Change database details from application.properties (default database management system :mysql)
-database name: movieCollection
-spring.datasource.url = jdbc:mysql://localhost:3306/movieCollection?serverTimezone=UTC&createDatabaseIfNotExist=true
-spring.datasource.username = root (change if necessary)
-spring.datasource.password = root (change if necessary)
+- database name: movieCollection
+- spring.datasource.url = jdbc:mysql://localhost:3306/movieCollection?serverTimezone=UTC&createDatabaseIfNotExist=true
+- spring.datasource.username = root (change if necessary)
+- spring.datasource.password = root (change if necessary)
 
 Run the application, then open your browser and launch it at 'localhost' as the URL.
